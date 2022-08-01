@@ -49,9 +49,10 @@ async def test(dut):
     await Timer(1)
     cocotb.log.info(f'cs1bar = {(dut.CS1bar)}')
     dut.RW.value=0b11
-    await Timer(110, units = 'ns') 
-
- 
+    
+    await Timer(90, units = 'ns') 
+    cocotb.log.info(f'MOSI = {(dut.MOSI)}')
+    
     cocotb.log.info(f'exact output data from master={(dut.data_out_from_master.value)} and exact output data from slave1 ={(dut.data_out_slave1.value)}');
      
     if(({bin(dut.data_out_from_master.value)} == input_vector1) and ({bin(dut.data_out_slave1.value)} == input_vector)):
