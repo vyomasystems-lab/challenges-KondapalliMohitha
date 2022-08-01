@@ -7,7 +7,7 @@ module Spi_Protocol(clk, reset, data_in_to_master, data_out_from_master, data_in
   input reset;
 
   input [7:0] data_in_to_master;
-  inout wire [7:0] data_out_from_master;
+  output wire [7:0] data_out_from_master;
 
   input  [7:0] data_in_slave1;
   input  [7:0] data_in_slave2;
