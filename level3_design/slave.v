@@ -12,11 +12,15 @@ module slave (MODE, data_in, reset, clk, MOSI, MISO, CS, data_out);
 
   reg [7:0] R_data;
   reg [7:0] T_data; 
-  reg done;
+  reg done;//
   integer count=0;
   reg is_read=0;
+//wire sclk;
+//assign sclk= (MODE==2'b00||MODE==2'b11)?~clk:clk;
   always@(posedge clk)
     begin
+//if(MODE==2'b00||MODE==2'b11)
+//begin
       if((reset||!is_read))
         begin
           T_data=data_in;
@@ -24,8 +28,11 @@ module slave (MODE, data_in, reset, clk, MOSI, MISO, CS, data_out);
           entered=0;
           done=0;
         end
+//end
       if(!CS)
         begin
+    //if(MODE==2'b00||MODE==2'b11)
+    //  begin
           if(entered)
             begin
               R_data={MOSI,R_data[7:1]};
@@ -39,10 +46,21 @@ module slave (MODE, data_in, reset, clk, MOSI, MISO, CS, data_out);
                   done=1; 
                 end
             end 
+    //  end
+    /*else if(MODE==2'b10||MODE==2'b01)
+      if(!done)
+        begin       
+        MISO=T_data[7];
+        T_data={T_data[6:0],1'bx};   
+        entered=1;
+        is_read=1; 
+        end*/
         end
     end
   always@(negedge clk)
     begin
+/*if(MODE==2'b01||MODE==2'b10)
+begin*/
       if((reset||!is_read))
         begin
           T_data=data_in;
@@ -50,6 +68,7 @@ module slave (MODE, data_in, reset, clk, MOSI, MISO, CS, data_out);
           entered=0;
           done=0;
         end
+//end
       if(!CS)
         begin 
           if(!done)

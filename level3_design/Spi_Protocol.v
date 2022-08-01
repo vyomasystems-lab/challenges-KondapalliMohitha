@@ -7,25 +7,25 @@ module Spi_Protocol(clk, reset, data_in_to_master, data_out_from_master, data_in
   input reset;
 
   input [7:0] data_in_to_master;
-  output reg [7:0] data_out_from_master;
+  inout wire [7:0] data_out_from_master;
 
   input  [7:0] data_in_slave1;
   input  [7:0] data_in_slave2;
   input  [7:0] data_in_slave3;
 
-  output reg [7:0] data_out_slave1;
-  output reg [7:0] data_out_slave2;
-  output reg [7:0] data_out_slave3;
+  output wire [7:0] data_out_slave1;
+  output wire [7:0] data_out_slave2;
+  output wire [7:0] data_out_slave3;
 
-  input    [1:0]CS;
-  input    [1:0]RW;
+  input    [1:0]CS;//has 4-states: 3 for the slaves and an idle state 
+  input    [1:0]RW;//Read-Write, //for TB only
   input    [1:0]MODE;
 
-  reg MOSI;
-  reg MISO;
-  reg MISO1;
-  reg MISO2;
-  reg MISO3;
+  wire MOSI;
+  wire MISO;
+  wire MISO1;
+  wire MISO2;
+  wire MISO3;
 
   wire CS1bar;
   wire CS2bar;
@@ -34,8 +34,8 @@ module Spi_Protocol(clk, reset, data_in_to_master, data_out_from_master, data_in
   wire sclk;
   wire sreset;
   wire[1:0]sMODE;
-
-  SPI_Master  MSTR
+//internal modules
+  Master  MSTR
   (.clk(clk),
    .reset(reset),
    .MODE(MODE),
