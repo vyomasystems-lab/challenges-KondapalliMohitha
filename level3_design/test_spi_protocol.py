@@ -26,9 +26,12 @@ async def test(dut):
     dut.MODE.value = 0b01
     input_vector = 0b10101010
     input_vector1 = 0b11100111
+    input_vector2 = 0b11100111
+    input_vector3 = 0b11100111
     dut.data_in_to_master.value =input_vector
     dut.data_in_slave1.value =input_vector1
-    
+    dut.data_in_slave2.value =input_vector2
+    dut.data_in_slave3.value =input_vector3
     await Timer(1)
     cocotb.log.info(f'Current data in Master={(dut.data_in_to_master.value)}')
     cocotb.log.info(f'Current data in slave1={(dut.data_in_slave1.value)}')
