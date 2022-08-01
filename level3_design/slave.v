@@ -12,7 +12,7 @@ module slave (MODE, data_in, reset, clk, MOSI, MISO, CS, data_out);
 
   reg [7:0] R_data;
   reg [7:0] T_data; 
-  reg done;//
+  reg done;
   integer count=0;
   reg is_read=0;
   always@(posedge clk)

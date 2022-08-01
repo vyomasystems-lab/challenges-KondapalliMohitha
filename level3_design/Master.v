@@ -19,14 +19,10 @@ module SPI_Master // Mode 0 -> CPOL=0,CPHA=0 -> data sampled on rising edge and 
 	output wire sreset;
   output wire[1:0]sMODE;
   input  [7:0]data_in; 
-  output wire[7:0]data_out;
+  output reg[7:0]data_out;
   input  [1:0]CS; 
   input      [1:0]RW; 
-// RW | read from MISO  | write on MOSI
-// 00 | false		| flase
-// 01 | false		| true
-// 10 | true		| false
-// 11 | true		| true
+
 
 
 
